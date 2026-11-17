@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1930">
+  <meta name="description" content="네이버 금융 ETF 목록을 이용한 국내 상장 ETF 분석 대시보드">
+  <title>ETF 인사이트 | 국내 상장 ETF 대시보드</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="ETF 인사이트">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <span>ETF <strong>INSIGHT</strong></span>
+      </div>
+      <div class="topbar-right">
+        <a class="source-link" href="https://finance.naver.com/sise/etf.naver" target="_blank" rel="noopener noreferrer">데이터 원천 <span aria-hidden="true">↗</span></a>
+        <span class="live-pill"><span class="live-dot"></span> NAVER FINANCE</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> KOREA ETF MARKET OVERVIEW</div>
+          <h1 id="page-title">국내 상장 ETF를<br><em>한눈에 살펴보세요.</em></h1>
+          <p>네이버 금융의 최신 ETF 목록을 바탕으로 운용사, 투자시장, 상품유형과 규모를 탐색합니다.</p>
+          <div class="hero-meta">
+            <span id="feed-status" class="status-chip" role="status"><span class="status-dot"></span> 데이터 연결 중</span>
+            <span id="updated-at">최근 조회 · —</span>
+            <span class="meta-divider"></span>
+            <span>60초 자동 갱신</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="art-bar bar-one"></div><div class="art-bar bar-two"></div><div class="art-bar bar-three"></div><div class="art-bar bar-four"></div><div class="art-bar bar-five"></div>
+          <div class="art-line"><svg viewBox="0 0 420 210" preserveAspectRatio="none"><path d="M0 170 C35 162 48 179 80 154 S134 133 162 145 S214 93 242 100 S296 126 323 73 S378 68 420 26"/></svg></div>
+          <div class="art-label">MARKET<br>OVERVIEW <span>↗</span></div>
+        </div>
+      </section>
+
+      <section class="kpis" aria-label="주요 지표">
+        <article class="kpi-card"><div class="kpi-icon icon-blue">▦</div><div class="kpi-title">조회 ETF</div><strong id="kpi-count">—</strong><div class="kpi-foot">현재 필터 기준 종목 수</div></article>
+        <article class="kpi-card"><div class="kpi-icon icon-teal">◈</div><div class="kpi-title">추정 순자산총액</div><strong id="kpi-aum">—</strong><div class="kpi-foot">NAV × 추정 상장좌수</div></article>
+        <article class="kpi-card"><div class="kpi-icon icon-purple">↗</div><div class="kpi-title">3개월 평균 수익률</div><strong id="kpi-return">—</strong><div class="kpi-foot">수익률 제공 종목 단순 평균</div></article>
+        <article class="kpi-card"><div class="kpi-icon icon-orange">⌁</div><div class="kpi-title">상승 종목</div><strong id="kpi-rising">—</strong><div class="kpi-foot">전일 대비 등락률 0% 초과</div></article>
+      </section>
+
+      <section class="filter-panel" aria-labelledby="filter-title">
+        <div class="section-heading compact"><div><span class="section-kicker">EXPLORE</span><h2 id="filter-title">조건별 조회</h2></div><button id="reset-filters" class="text-button" type="button">필터 초기화 <span aria-hidden="true">↺</span></button></div>
+        <div class="filter-grid">
+          <label class="field search-field"><span>종목 검색</span><span class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="search" type="search" placeholder="종목명 또는 종목코드" autocomplete="off"></span></label>
+          <label class="field"><span>운용사</span><select id="manager"><option value="">전체 운용사</option></select></label>
+          <label class="field"><span>투자시장</span><select id="market"><option value="">전체 시장</option></select></label>
+          <label class="field"><span>상품유형</span><select id="type"><option value="">전체 유형</option></select></label>
+          <label class="field"><span>추정 순자산총액</span><select id="aum"><option value="">전체 규모</option></select></label>
+        </div>
+      </section>
+
+      <section class="analysis-section" aria-labelledby="analysis-title">
+        <div class="section-heading"><div><span class="section-kicker">MARKET STRUCTURE</span><h2 id="analysis-title">ETF 시장 분석</h2><p>그래프 항목을 선택하면 해당 조건으로 목록을 좁힙니다.</p></div><div class="metric-switch" aria-label="그래프 기준"><button type="button" data-metric="aum" class="active" aria-pressed="true">순자산 규모</button><button type="button" data-metric="count" aria-pressed="false">종목 수</button></div></div>
+        <div class="analysis-grid">
+          <article class="chart-card manager-card"><div class="chart-head"><div><span class="chart-no">01 / MANAGER</span><h3>운용사별 분포</h3></div><span id="manager-total" class="chart-summary">—</span></div><div id="manager-chart" class="bar-chart" aria-label="운용사별 분포"></div></article>
+          <article class="chart-card market-card"><div class="chart-head"><div><span class="chart-no">02 / MARKET</span><h3>투자시장별 분포</h3></div></div><div class="donut-layout"><div id="market-donut" class="donut" role="img" aria-label="투자시장별 분포"><div class="donut-hole"><strong id="donut-total">—</strong><span id="donut-unit">억원</span></div></div><div id="market-legend" class="donut-legend"></div></div></article>
+          <article class="chart-card"><div class="chart-head"><div><span class="chart-no">03 / PRODUCT TYPE</span><h3>상품유형별 분포</h3></div></div><div id="type-chart" class="bar-chart"></div></article>
+          <article class="chart-card"><div class="chart-head"><div><span class="chart-no">04 / ASSET SIZE</span><h3>순자산 규모별 분포</h3></div></div><div id="aum-chart" class="bar-chart"></div></article>
+        </div>
+      </section>
+
+      <section class="table-section" aria-labelledby="table-title">
+        <div class="section-heading table-heading"><div><span class="section-kicker">ETF SCREENER</span><h2 id="table-title">ETF 전체 목록 <span id="result-count" class="result-count">—</span></h2><p>표의 열 제목을 누르면 정렬할 수 있습니다.</p></div><div class="table-actions"><button id="refresh" class="outline-button" type="button" title="최신 데이터 다시 조회">↻ <span>새로고침</span></button><button id="download-csv" class="dark-button" type="button">↓ <span>CSV 내려받기</span></button></div></div>
+        <div id="error-banner" class="error-banner" role="alert" hidden></div>
+        <div class="table-toolbar"><span id="table-caption">—</span><label>페이지당 <select id="page-size"><option value="20">20개</option><option value="50">50개</option><option value="100">100개</option></select></label></div>
+        <div class="table-scroll"><table><thead><tr>
+          <th><button class="sort-button" data-sort="name" type="button">ETF 종목 <span class="sort-indicator"></span></button></th>
+          <th><button class="sort-button" data-sort="manager" type="button">운용사 <span class="sort-indicator"></span></button></th>
+          <th><button class="sort-button" data-sort="market" type="button">투자시장 <span class="sort-indicator"></span></button></th>
+          <th><button class="sort-button" data-sort="type" type="button">상품유형 <span class="sort-indicator"></span></button></th>
+          <th class="num"><button class="sort-button" data-sort="price" type="button">현재가 <span class="sort-indicator"></span></button></th>
+          <th class="num"><button class="sort-button" data-sort="change" type="button">전일 대비 <span class="sort-indicator"></span></button></th>
+          <th class="num"><button class="sort-button" data-sort="return3m" type="button">3개월 <span class="sort-indicator"></span></button></th>
+          <th class="num"><button class="sort-button" data-sort="aum" type="button">추정 순자산 <span class="sort-indicator"></span></button></th>
+        </tr></thead><tbody id="etf-rows"><tr><td colspan="8" class="empty-row">데이터를 불러오는 중입니다.</td></tr></tbody></table></div>
+        <div class="pagination"><span id="pagination-info">—</span><div class="page-buttons"><button id="prev-page" type="button" aria-label="이전 페이지">‹</button><span id="page-numbers"></span><button id="next-page" type="button" aria-label="다음 페이지">›</button></div></div>
+      </section>
+
+      <aside class="method-note"><span class="note-symbol">i</span><div><strong>데이터와 분류 기준</strong><p>시세·NAV·시가총액은 <a href="https://finance.naver.com/api/sise/etfItemList.nhn" target="_blank" rel="noopener noreferrer">네이버 금융 ETF 목록</a>에서 조회합니다. 추정 순자산총액은 시가총액 × NAV ÷ 현재가로 계산하며, 공시된 확정 순자산총액과 다를 수 있습니다. 운용사는 ETF 이름의 브랜드로, 투자시장과 상품유형은 네이버 분류 코드와 상품명으로 분류합니다. 이 정보는 조회 시점의 스냅샷이며 시세 제공처의 갱신 주기를 따릅니다.</p></div></aside>
+    </main>
+    <footer><span>ETF INSIGHT · ETF 데이터 탐색 대시보드</span><span>자료 제공: 네이버 금융 <span aria-hidden="true">·</span> 모든 시간은 한국 표준시</span></footer>
+  </div>
+</body>
+</html>
